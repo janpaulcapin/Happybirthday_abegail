@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05030c">
+  <title>The Universe Chose You ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cosmic.css">
+</head>
+<body class="cosmic-page">
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+  <canvas id="cosmic-canvas" aria-hidden="true"></canvas>
+  <div class="cosmic-nebula" aria-hidden="true"></div>
+  <div class="cosmic-vignette" aria-hidden="true"></div>
+
+  <main class="cosmic-stage">
+    <div class="cosmic-camera" id="cosmic-camera">
+      <div class="cosmic-intro" id="cosmic-intro">
+        <span class="cosmic-overline">A MOMENT WRITTEN IN THE STARS</span>
+        <p>Somewhere in this infinite universe...</p>
+      </div>
+
+      <div class="cosmic-centerpiece">
+        <div class="cosmic-orbit orbit-one" aria-hidden="true"></div>
+        <div class="cosmic-orbit orbit-two" aria-hidden="true"></div>
+        <div class="cosmic-star-halo" aria-hidden="true"></div>
+        <button class="cosmic-star" id="cosmic-star" type="button" aria-label="Touch the star to discover your universe">
+          <span aria-hidden="true"></span>
+        </button>
+        <p class="cosmic-instruction" id="cosmic-instruction">Touch the star to discover your universe.</p>
+      </div>
+
+      <section class="cosmic-reveal" id="cosmic-reveal" aria-live="polite" aria-hidden="true">
+        <span class="cosmic-overline reveal-overline">A RARE AND BEAUTIFUL ALIGNMENT</span>
+        <p class="cosmic-name" id="cosmic-name">Abegail</p>
+        <h1>THE UNIVERSE CHOSE YOU.</h1>
+        <p class="cosmic-supporting">Out of billions of stars, today is your moment to shine.</p>
+      </section>
+
+      <div class="cosmic-portal" id="cosmic-portal" aria-hidden="true">
+        <div class="portal-ring portal-ring-outer"></div>
+        <div class="portal-ring portal-ring-middle"></div>
+        <div class="portal-ring portal-ring-inner"></div>
+        <div class="portal-core"></div>
+      </div>
+
+      <section class="cosmic-next" id="cosmic-next" aria-hidden="true">
+        <p>Your next surprise awaits beyond the stars...</p>
+        <button class="portal-button" id="portal-button" type="button" disabled>ENTER THE PORTAL</button>
+      </section>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="cosmic.js"></script>
+  <script src="site-music.js"></script>
+</body>
+</html>

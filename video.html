@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Video Message 🎥</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ═══ CUSTOMIZER DRAWER ══════════════════════ -->
+  <div class="drawer" id="customizer-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title">Personalize Site ✨</h3>
+      <button class="drawer-close" id="drawer-close">×</button>
+    </div>
+    <div class="drawer-content">
+      <div class="form-group">
+        <label class="form-label">Color Theme</label>
+        <div class="theme-options">
+          <button class="theme-opt theme-rose" data-theme-val="rose">Rose</button>
+          <button class="theme-opt theme-cosmic" data-theme-val="cosmic">Cosmic</button>
+          <button class="theme-opt theme-emerald" data-theme-val="emerald">Emerald</button>
+          <button class="theme-opt theme-retro" data-theme-val="retro">Retro</button>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="input-video">Upload Video Message 🎥</label>
+        <input type="file" id="input-video" class="form-control" accept="video/*">
+        <p style="font-size:0.7rem;color:rgba(255,248,240,0.4);margin-top:2px;">Select an MP4/WebM video file to replace the current birthday video.</p>
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <button class="drawer-btn save" id="btn-save-drawer">Save Changes ✨</button>
+      <button class="drawer-btn reset" id="btn-reset-drawer">Reset to Default</button>
+    </div>
+  </div>
+
+  <section class="thread-cake-scene" aria-labelledby="thread-cake-title">
+    <canvas class="thread-cake-stars" id="thread-cake-stars" aria-hidden="true"></canvas>
+    <div class="thread-cake-content">
+      <p class="thread-cake-kicker">A birthday written in the stars</p>
+      <h1 class="thread-cake-title" id="thread-cake-title">Watch a little magic unfold</h1>
+      <h2 class="thread-cake-name" id="thread-cake-name" aria-live="polite"></h2>
+
+      <svg class="thread-cake-art" id="thread-cake-art" viewBox="110 50 420 430" role="img" aria-label="A tall blue birthday cake with piped icing, snowflakes, birthday lettering, and candles, drawn in glowing thread">
+        <defs>
+          <linearGradient id="thread-cake-color" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fffaff"/>
+            <stop offset=".5" stop-color="#b4edff"/>
+            <stop offset="1" stop-color="#8baeff"/>
+          </linearGradient>
+          <linearGradient id="thread-flame-color" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#ff6937"/>
+            <stop offset=".58" stop-color="#ffda76"/>
+            <stop offset="1" stop-color="#fffbe4"/>
+          </linearGradient>
+          <linearGradient id="cake-bottom-color" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#d9faff"/>
+            <stop offset=".18" stop-color="#69d1ed"/>
+            <stop offset=".52" stop-color="#2585bd"/>
+            <stop offset=".82" stop-color="#145581"/>
+            <stop offset="1" stop-color="#b0edff"/>
+          </linearGradient>
+          <linearGradient id="cake-middle-color" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#dcfbff"/>
+            <stop offset=".2" stop-color="#78d8ef"/>
+            <stop offset=".55" stop-color="#328fbe"/>
+            <stop offset=".85" stop-color="#1b5c8c"/>
+            <stop offset="1" stop-color="#d5f8ff"/>
+          </linearGradient>
+          <linearGradient id="cake-top-color" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#f1fdff"/>
+            <stop offset=".32" stop-color="#9ce7f2"/>
+            <stop offset=".7" stop-color="#54b3d8"/>
+            <stop offset="1" stop-color="#236991"/>
+          </linearGradient>
+          <linearGradient id="cake-plate-color" x1="0" y1="0" x2="0" y2="1">
+            <stop stop-color="#fff"/>
+            <stop offset=".38" stop-color="#c5efff"/>
+            <stop offset=".72" stop-color="#6e91c5"/>
+            <stop offset="1" stop-color="#d8f5ff"/>
+          </linearGradient>
+          <linearGradient id="cake-candle-color" x1="0" y1="0" x2="1" y2="0">
+            <stop stop-color="#789ccc"/>
+            <stop offset=".35" stop-color="#effcff"/>
+            <stop offset=".62" stop-color="#fff8dd"/>
+            <stop offset="1" stop-color="#819fc8"/>
+          </linearGradient>
+          <filter id="thread-cake-glow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <g class="thread-cake-color" aria-hidden="true">
+          <ellipse cx="320" cy="420" rx="190" ry="28" fill="#160f2d" opacity=".62"/>
+          <path d="M132 407 Q320 451 508 407 L496 427 Q320 466 144 427 Z" fill="url(#cake-plate-color)" stroke="#eee1ff" stroke-opacity=".7" stroke-width="2"/>
+          <ellipse cx="320" cy="407" rx="188" ry="25" fill="#e7d8fa" stroke="#fff3ff" stroke-opacity=".8" stroke-width="2"/>
+          <ellipse cx="320" cy="406" rx="170" ry="17" fill="none" stroke="#aa91d0" stroke-opacity=".55" stroke-width="2"/>
+          <path d="M164 325 Q320 350 476 325 L476 407 Q320 431 164 407 Z" fill="url(#cake-bottom-color)"/>
+          <path d="M165 365 Q320 389 475 365 L475 397 Q320 421 165 397 Z" fill="#7d426f" opacity=".18"/>
+          <path d="M177 353 Q205 358 230 360 M448 350 Q424 357 401 359" fill="none" stroke="#fff1f4" stroke-opacity=".44" stroke-width="3"/>
+          <path d="M164 325 Q320 350 476 325 Q468 343 452 340 Q435 337 426 347 Q414 359 399 347 Q386 337 373 347 Q359 359 344 347 Q330 337 316 347 Q301 359 287 347 Q273 337 259 347 Q245 359 230 347 Q216 337 202 347 Q188 358 176 344 Z" fill="#e2f7ff"/>
+          <path d="M194 251 Q320 273 446 251 L446 325 Q320 344 194 325 Z" fill="url(#cake-middle-color)"/>
+          <path d="M196 291 Q320 309 444 291 L444 317 Q320 336 196 317 Z" fill="#5c4388" opacity=".17"/>
+          <path d="M208 277 Q231 281 254 283 M431 274 Q408 280 387 282" fill="none" stroke="#fff2e8" stroke-opacity=".44" stroke-width="2.5"/>
+          <path d="M194 251 Q320 274 446 251 Q439 268 426 266 Q412 264 403 274 Q391 286 378 274 Q365 264 352 274 Q339 286 326 274 Q312 264 299 274 Q286 286 273 274 Q260 264 247 274 Q234 285 221 273 Q208 283 198 266 Z" fill="#e4f7ff"/>
+          <path d="M226 181 Q320 197 414 181 L414 251 Q320 266 226 251 Z" fill="url(#cake-top-color)"/>
+          <path d="M228 217 Q320 231 412 217 L412 244 Q320 260 228 244 Z" fill="#9f5c92" opacity=".14"/>
+          <path d="M239 204 Q258 208 276 210 M401 202 Q382 208 365 210" fill="none" stroke="#fff8ee" stroke-opacity=".56" stroke-width="2.5"/>
+          <path d="M226 181 Q320 198 414 181 Q408 196 396 195 Q384 194 376 202 Q365 214 353 203 Q341 194 329 203 Q317 214 305 203 Q293 194 281 203 Q269 214 257 203 Q245 194 233 201 Z" fill="#f0fcff"/>
+
+          <g fill="#f4fcff" stroke="#b9e9ff" stroke-width="1">
+            <circle cx="194" cy="370" r="4"/><circle cx="224" cy="375" r="4"/><circle cx="254" cy="379" r="4"/>
+            <circle cx="284" cy="382" r="4"/><circle cx="314" cy="384" r="4"/><circle cx="344" cy="384" r="4"/>
+            <circle cx="374" cy="382" r="4"/><circle cx="404" cy="379" r="4"/><circle cx="434" cy="375" r="4"/>
+            <circle cx="217" cy="301" r="3.5"/><circle cx="248" cy="306" r="3.5"/><circle cx="279" cy="310" r="3.5"/>
+            <circle cx="310" cy="312" r="3.5"/><circle cx="341" cy="312" r="3.5"/><circle cx="372" cy="310" r="3.5"/>
+            <circle cx="403" cy="306" r="3.5"/><circle cx="251" cy="229" r="3.2"/><circle cx="281" cy="233" r="3.2"/>
+            <circle cx="311" cy="236" r="3.2"/><circle cx="341" cy="236" r="3.2"/><circle cx="371" cy="233" r="3.2"/>
+          </g>
+          <g fill="url(#cake-candle-color)" stroke="#fff6e7" stroke-opacity=".88" stroke-width="1.5">
+            <path d="M270 132 Q274 128 278 132 L277 181 L271 181 Z"/>
+            <path d="M291 124 Q295 120 299 124 L298 181 L292 181 Z"/>
+            <path d="M316 119 Q320 115 324 119 L324 183 L316 183 Z"/>
+            <path d="M341 124 Q345 120 349 124 L348 181 L342 181 Z"/>
+            <path d="M362 132 Q366 128 370 132 L369 181 L363 181 Z"/>
+          </g>
+          <g fill="none" stroke="#d18cb7" stroke-width="2" opacity=".85">
+            <path d="M271 145 l6 0 M271 160 l6 0 M292 139 l6 0 M292 155 l6 0 M317 137 l6 0 M317 155 l6 0 M342 139 l6 0 M342 155 l6 0 M363 145 l6 0 M363 160 l6 0"/>
+          </g>
+          <path d="M245 365 Q320 377 395 365 L395 399 Q320 412 245 399 Z" fill="#174f82" opacity=".22"/>
+          <g class="cake-lettering" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700">
+            <text x="320" y="381" fill="#f8fdff" stroke="#153e69" stroke-width="3.5" paint-order="stroke" font-size="14" letter-spacing="1.4">HAPPY</text>
+            <text x="320" y="399" fill="#f8fdff" stroke="#153e69" stroke-width="3.5" paint-order="stroke" font-size="16" letter-spacing=".7">BIRTHDAY</text>
+          </g>
+          <g class="cake-snowflake-fill" fill="none" stroke="#effbff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M216 309 V273 M200 282 L232 300 M232 282 L200 300 M216 273 l-6 8 m6-8 6 8 M200 282 l2 8 m-2-8 8 2 M232 282 l-2 8 m2-8-8 2 M216 309 l-6-8 m6 8 6-8 M200 300 l2-8 m-2 8 8-2 M232 300 l-2-8 m2 8-8-2"/>
+            <path d="M424 309 V273 M408 282 L440 300 M440 282 L408 300 M424 273 l-6 8 m6-8 6 8 M408 282 l2 8 m-2-8 8 2 M440 282 l-2 8 m2-8-8 2 M424 309 l-6-8 m6 8 6-8 M408 300 l2-8 m-2 8 8-2 M440 300 l-2-8 m2 8-8-2"/>
+          </g>
+          <path d="M168 349 Q205 359 240 363 M472 349 Q435 359 400 363" fill="none" stroke="#e6faff" stroke-opacity=".54" stroke-width="4" stroke-linecap="round"/>
+          <path d="M202 275 Q218 280 234 282 M438 275 Q422 280 406 282" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round"/>
+          <g fill="#fff8e6" stroke="#caefff" stroke-width="1.2">
+            <circle cx="181" cy="354" r="3"/><circle cx="199" cy="358" r="3"/><circle cx="217" cy="361" r="3"/>
+            <circle cx="423" cy="361" r="3"/><circle cx="441" cy="358" r="3"/><circle cx="459" cy="354" r="3"/>
+            <circle cx="240" cy="300" r="2.7"/><circle cx="400" cy="300" r="2.7"/>
+          </g>
+          <g class="cake-candle-halo" fill="#ffc96f" opacity=".12" filter="url(#thread-cake-glow)">
+            <circle cx="272" cy="119" r="19"/><circle cx="294" cy="111" r="19"/><circle cx="320" cy="106" r="21"/>
+            <circle cx="346" cy="111" r="19"/><circle cx="368" cy="119" r="19"/>
+          </g>
+        </g>
+
+        <g class="thread-cake-lines" fill="none" stroke="url(#thread-cake-color)" stroke-linecap="round" stroke-linejoin="round" filter="url(#thread-cake-glow)">
+          <path class="thread-line" d="M132 407 Q320 451 508 407 L496 427 Q320 466 144 427 Z"/>
+          <path class="thread-line" d="M132 407 Q320 431 508 407 M150 416 Q320 451 490 416 M174 420 Q320 448 466 420"/>
+          <path class="thread-line" d="M164 325 Q320 350 476 325 L476 407 Q320 431 164 407 Z"/>
+          <path class="thread-line" d="M164 325 Q320 350 476 325 Q468 343 452 340 Q435 337 426 347 Q414 359 399 347 Q386 337 373 347 Q359 359 344 347 Q330 337 316 347 Q301 359 287 347 Q273 337 259 347 Q245 359 230 347 Q216 337 202 347 Q188 358 176 344 Z"/>
+          <path class="thread-line" d="M194 251 Q320 273 446 251 L446 325 Q320 344 194 325 Z"/>
+          <path class="thread-line" d="M194 251 Q320 274 446 251 Q439 268 426 266 Q412 264 403 274 Q391 286 378 274 Q365 264 352 274 Q339 286 326 274 Q312 264 299 274 Q286 286 273 274 Q260 264 247 274 Q234 285 221 273 Q208 283 198 266 Z"/>
+          <path class="thread-line" d="M226 181 Q320 197 414 181 L414 251 Q320 266 226 251 Z"/>
+          <path class="thread-line" d="M226 181 Q320 198 414 181 Q408 196 396 195 Q384 194 376 202 Q365 214 353 203 Q341 194 329 203 Q317 214 305 203 Q293 194 281 203 Q269 214 257 203 Q245 194 233 201 Z"/>
+          <path class="thread-line" d="M220 315 Q320 333 420 315 M241 240 Q320 254 399 240 M263 171 Q320 181 377 171"/>
+          <path class="thread-line" d="M204 378 l12 2 m19 3 12 2 m25 3 12 1 m25 2 12 1 m28 0 12-1 m25-2 12-2 m22-4 12-3 M230 300 l10 2 m23 3 10 1 m25 2 10 1 m27 0 10-1 m24-3 10-2 M255 225 l9 1 m24 3 9 1 m25 0 9-1 m23-3 9-1"/>
+          <path class="thread-line" d="M270 181 L269 133 Q273 128 277 133 L277 181 M293 181 L292 125 Q296 120 300 125 L300 181 M316 183 L316 119 Q320 114 324 119 L324 183 M340 181 L340 125 Q344 120 348 125 L347 181 M363 181 L363 133 Q367 128 371 133 L370 181"/>
+          <path class="thread-line" d="M271 145 l6 0 M271 159 l6 0 M293 140 l6 0 M293 155 l6 0 M317 137 l6 0 M317 155 l6 0 M341 140 l6 0 M341 155 l6 0 M364 145 l6 0 M364 159 l6 0"/>
+          <path class="thread-line" d="M298 187 C302 176 313 176 317 187 C321 198 309 203 304 197 M329 186 C335 176 345 180 346 189 C347 199 337 202 332 196"/>
+          <path class="thread-line" d="M194 370 l4 0 M224 375 l4 0 M254 379 l4 0 M284 382 l4 0 M314 384 l4 0 M344 384 l4 0 M374 382 l4 0 M404 379 l4 0 M434 375 l4 0 M217 301 l4 0 M248 306 l4 0 M279 310 l4 0 M310 312 l4 0 M341 312 l4 0 M372 310 l4 0 M403 306 l4 0 M251 229 l4 0 M281 233 l4 0 M311 236 l4 0 M341 236 l4 0 M371 233 l4 0"/>
+          <path class="thread-line" d="M216 309 V273 M200 282 L232 300 M232 282 L200 300 M216 273 l-6 8 m6-8 6 8 M200 282 l2 8 m-2-8 8 2 M232 282 l-2 8 m2-8-8 2 M216 309 l-6-8 m6 8 6-8 M200 300 l2-8 m-2 8 8-2 M232 300 l-2-8 m2 8-8-2"/>
+          <path class="thread-line" d="M424 309 V273 M408 282 L440 300 M440 282 L408 300 M424 273 l-6 8 m6-8 6 8 M408 282 l2 8 m-2-8 8 2 M440 282 l-2 8 m2-8-8 2 M424 309 l-6-8 m6 8 6-8 M408 300 l2-8 m-2 8 8-2 M440 300 l-2-8 m2 8-8-2"/>
+          <path class="thread-line" d="M245 365 Q320 377 395 365 L395 399 Q320 412 245 399 Z M270 373 Q320 381 370 373 M270 392 Q320 401 370 392"/>
+          <path class="thread-line" d="M168 349 Q205 359 240 363 M472 349 Q435 359 400 363 M202 275 Q218 280 234 282 M438 275 Q422 280 406 282"/>
+        </g>
+
+        <g class="thread-cake-lines thread-cake-flames" aria-hidden="true">
+          <path class="thread-line thread-flame" data-candle-flame="1" d="M273 131 C262 119 270 102 274 92 C287 106 286 121 273 131 Z"/>
+          <path class="thread-line thread-flame" data-candle-flame="2" d="M296 123 C284 111 293 94 297 84 C311 98 309 113 296 123 Z"/>
+          <path class="thread-line thread-flame" data-candle-flame="3" d="M320 117 C307 103 316 84 321 71 C336 87 334 105 320 117 Z"/>
+          <path class="thread-line thread-flame" data-candle-flame="4" d="M344 123 C332 111 341 94 345 84 C359 98 357 113 344 123 Z"/>
+          <path class="thread-line thread-flame" data-candle-flame="5" d="M367 131 C355 119 364 102 368 92 C382 106 380 121 367 131 Z"/>
+        </g>
+        <circle class="thread-cake-tip" id="thread-cake-tip" r="5" cx="0" cy="0" aria-hidden="true"/>
+      </svg>
+
+      <p class="thread-cake-greeting" id="thread-cake-greeting" aria-live="polite">Happy Birthday</p>
+      <a class="thread-cake-continue" href="#video-message">Continue to your message <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="music-section" id="video-message" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem;">
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-3"></div>
+
+    <p class="section-label reveal">Secret Message</p>
+    <h2 class="section-title reveal" style="margin-bottom: 0.5rem;" id="greeting-title">Special Video for HANNU! 💖</h2>
+    <div class="divider reveal"></div>
+    <p class="reveal" style="color: rgba(255,248,240,0.6); max-width: 500px; margin: 0 auto 2.5rem; text-align: center;">
+      Here is a special birthday video message. Make sure your volume is up! 🔊
+    </p>
+
+    <!-- Glassmorphic Video Player Card -->
+    <div class="music-player birthday-video-player reveal">
+      <div class="birthday-video-frame">
+        <video id="bday-video" class="birthday-video" controls playsinline loop>
+          <source src="video/abe%20video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p style="font-size: 0.85rem; color: rgba(255, 248, 240, 0.55); text-align: center; margin-top: 1.2rem;" id="video-footer">
+        Press play to watch the sweet memory.
+      </p>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div style="display: flex; gap: 1rem; margin-top: 4rem; width: 100%; max-width: 500px; justify-content: center; position: relative; z-index: 10;">
+      <a href="gallery.html" class="btn-secondary" style="margin: 0; flex: 1;">
+        <span>⏮</span> Back to Memories
+      </a>
+      <a href="index.html" class="btn-primary" style="margin: 0; flex: 1;">
+        <span>🔒</span> Unlock Start
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-heart">🎂</div>
+    <p class="footer-text">Made with love, just for you.</p>
+  </footer>
+
+  <!-- Shared Javascript Library -->
+  <script src="shared.js"></script>
+  <script src="thread-cake.js"></script>
+  <script>
+    const greetingTitle = document.getElementById("greeting-title");
+    const themeOpts = document.querySelectorAll(".theme-opt");
+    const videoElement = document.getElementById("bday-video");
+    const videoSource = videoElement.querySelector("source");
+    const videoFooter = document.getElementById("video-footer");
+
+    // Ensure the birthday video plays with sound and starts at full volume.
+    videoElement.muted = false;
+    videoElement.volume = 1.0;
+
+    function setVideoSource(src) {
+      if (videoSource) {
+        videoSource.src = src;
+      }
+      videoElement.src = src;
+      videoElement.load();
+    }
+
+    function updatePageContent() {
+      // Set header greeting
+      greetingTitle.innerHTML = `Special Video for <em>${activeConfig.name.toUpperCase()}</em>! 💖`;
+      document.getElementById("thread-cake-name").textContent = activeConfig.name;
+
+      // Theme toggle indicators
+      themeOpts.forEach(opt => {
+        opt.classList.toggle("selected", opt.dataset.themeVal === activeConfig.theme);
+      });
+
+      // Load Video source
+      if (activeConfig.videoData) {
+        setVideoSource(activeConfig.videoData);
+      } else {
+        setVideoSource("video/abe%20video.mp4");
+      }
+    }
+
+    // Handle video uploading
+    document.getElementById("input-video").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const objectURL = URL.createObjectURL(file);
+      setVideoSource(objectURL);
+      videoFooter.textContent = "New video loaded — press play to watch it.";
+      
+      // Save data URL to activeConfig if it is small enough (under 3.5MB) to avoid QuotaExceededError
+      if (file.size < 3.5 * 1024 * 1024) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          activeConfig.videoData = evt.target.result;
+          saveConfig();
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // Too large for localstorage, clear previously stored data to avoid conflicts
+        delete activeConfig.videoData;
+        saveConfig();
+        alert("Video loaded successfully! Note: Since this file is large, it will play now in this session, but won't be saved permanently to browser storage (max storage limit is 5MB).");
+      }
+      playSuccessChime();
+    });
+
+    videoElement.addEventListener("error", () => {
+      videoFooter.textContent = "Video failed to load. Check that video/abe video.mp4 exists or upload a compatible MP4.";
+      alert("Unable to load the birthday video. Check that video/abe video.mp4 exists, then refresh the page or upload a compatible MP4.");
+    });
+
+    videoElement.addEventListener("loadeddata", () => {
+      videoFooter.textContent = "Press play to watch the sweet memory.";
+    });
+
+    // ─── LIVE DRAWER LOGIC ───
+    const drawer = document.getElementById("customizer-drawer");
+    
+    document.getElementById("drawer-close").addEventListener("click", () => {
+      drawer.classList.remove("open");
+    });
+
+    themeOpts.forEach(opt => {
+      opt.addEventListener("click", () => {
+        themeOpts.forEach(o => o.classList.remove("selected"));
+        opt.classList.add("selected");
+        activeConfig.theme = opt.dataset.themeVal;
+        applyTheme(activeConfig.theme);
+      });
+    });
+
+    document.getElementById("btn-save-drawer").addEventListener("click", () => {
+      saveConfig();
+      updatePageContent();
+      drawer.classList.remove("open");
+      playSuccessChime();
+      alert("Settings saved successfully!");
+    });
+
+    document.getElementById("btn-reset-drawer").addEventListener("click", () => {
+      if (confirm("Reset layout configs to default?")) {
+        localStorage.removeItem('bday_config');
+        activeConfig = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+        applyTheme(activeConfig.theme);
+        
+        // Reset video element source
+        setVideoSource("video/abe%20video.mp4");
+        
+        updatePageContent();
+        drawer.classList.remove("open");
+        playSuccessChime();
+      }
+    });
+
+    // Scroll Reveal trigger
+    const revEls = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: .1 });
+    revEls.forEach(el => obs.observe(el));
+
+    // Page Load setup
+    updatePageContent();
+  </script>
+  <script src="site-music.js"></script>
+</body>
+</html>
